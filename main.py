@@ -80,7 +80,7 @@ def main():
         build_loader()
     elif userinput == "startserver":
         print(Fore.YELLOW + "[*] Starting the server..." + Style.RESET_ALL)
-        directory = input('Enter the directory to serve b64 file: ')
+        directory = input('Enter the directory to serve the zip file: ')
         if platform.system() == "Windows":
             os.system('start')
             subprocess.run(["python", "-m", "http.server", "8080", "--directory", directory])
@@ -88,6 +88,15 @@ def main():
         else:
             subprocess.run(["python3", "-m", "http.server", "8080", "--directory", directory])
             print(Fore.GREEN + '[*] Server started at port 8080' + Style.RESET_ALL)
+    elif userinput == "help":
+        print(Fore.MAGENTA + """
+mom's here to help you, my child.
+Available commands:
+- start: Build the loader and create the executable.
+- startserver: Start a simple HTTP server to serve the zip file.
+- exit: Exit the TorielLoader.
+- help: Show this help message.
+        """ + Style.RESET_ALL)
     else:
         print(Fore.RED + "[-] Unknown command. Please type 'start' to begin or 'exit' to quit." + Style.RESET_ALL)
         return
