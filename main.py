@@ -93,7 +93,7 @@ mom's here to help you, my child.
 Available commands:
 - start: Build the loader and create the executable.
 - startserver: Start a simple HTTP server to serve the zip file.
-- exit: Exit TorielLoader.
+- exit: Exit the TorielLoader.
 - help: Show this help message.
         """ + Style.RESET_ALL)
     else:
