@@ -3,8 +3,8 @@
 </div>
 
 # TorielLoader
-just a malware loader that probably can handle more malware, thats why its called
-toriel loader (you can probably know what im talking about if we talk about fan art)
+just a malware loader that probably can handle more malware (will implement later), thats why its called
+toriel loader (toriel has big boobs 🙏👅)
 
 # Required Modules
 - colorama 
