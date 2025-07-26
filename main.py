@@ -93,12 +93,22 @@ mom's here to help you, my child.
 Available commands:
 - start: Build the loader and create the executable.
 - startserver: Start a simple HTTP server to serve the zip file.
-- exit: Exit TorielLoader.
+- exit: Exit the TorielLoader.
 - help: Show this help message.
+- about: Show information about TorielLoader.
         """ + Style.RESET_ALL)
+    elif userinput == "about":
+        print(Fore.CYAN + """
+Oh, my child, you want to know about me?              
+
+TorielLoader is a Python-based tool designed to create a loader executables.
+It is intended for educational purposes and should not be used for malicious activities.
+Created by v1s0or, dialog by the character Toriel from the game Undertale. (dialog is not from the game, but inspired by it)
+        """ + Style.RESET_ALL)
+        main()
     else:
         print(Fore.RED + "[-] Unknown command. Please type 'start' to begin or 'exit' to quit." + Style.RESET_ALL)
-        return
+        main() 
 
 if __name__ == "__main__":
     main()
