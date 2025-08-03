@@ -4,7 +4,7 @@
 
 # TorielLoader
 just a malware loader that probably can handle more malware (will implement later), thats why its called
-toriel loader (toriel has big boobs 🙏👅)
+toriel loader
 
 # Required Modules
 - colorama 
